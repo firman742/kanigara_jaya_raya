@@ -20,7 +20,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Manajemen Mobil
-    Route::resource('mobil', VehicleController::class);
+    // Route::resource('mobil', VehicleController::class);
+    Route::get('/mobil', [VehicleController::class, 'index'])->name('mobil.index');
+    Route::get('/mobil/create', [VehicleController::class, 'create'])->name('mobil.create');
+    Route::post('/mobil', [VehicleController::class, 'store'])->name('mobil.store');
+    Route::get('/mobil/{vehicle}', [VehicleController::class, 'show'])->name('mobil.show');
+    Route::get('/mobil/{vehicle}/edit', [VehicleController::class, 'edit'])->name('mobil.edit');
+    Route::put('/mobil/{vehicle}', [VehicleController::class, 'update'])->name('mobil.update');
+    Route::delete('/mobil/{vehicle}', [VehicleController::class, 'destroy'])->name('mobil.destroy');
+
 });
 
 require __DIR__.'/auth.php';

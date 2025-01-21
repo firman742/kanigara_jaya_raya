@@ -11,7 +11,7 @@ class UpdateVehicleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,13 @@ class UpdateVehicleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'plat_nomor' => 'required|string|max:255',
+            'jenis' => 'required|string|max:255',
+            'seri' => 'required|string|max:255',
+            'tahun' => 'required|integer|min:1900|max:' . date('Y'),
+            'warna' => 'required|string|max:255',
+            'nomor_mesin' => 'required|string|max:255',
+            'nomor_sasis' => 'required|string|max:255',
         ];
     }
 }

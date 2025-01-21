@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Vehicle;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreVehicleRequest;
 use App\Http\Requests\UpdateVehicleRequest;
 
@@ -35,7 +36,27 @@ class VehicleController extends Controller
      */
     public function store(StoreVehicleRequest $request)
     {
-        var_dump($request);
+        $validator = Validator::make($request->all(), [
+            'plat_nomor' => 'required|string|max:255',
+            'jenis' => 'required|string|max:255',
+            'seri' => 'required|string|max:255',
+            'tahun' => 'required|integer|min:1900|max:' . date('Y'),
+            'warna' => 'required|string|max:255',
+            'nomor_mesin' => 'required|string|max:255',
+            'nomor_sasis' => 'required|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput()
+                ->with('error', 'Validasi data gagal. Silakan periksa kembali data Anda.');
+        }
+
+        Vehicle::create($request->all());
+
+        return redirect()->route('mobil.index')
+            ->with('success', 'Data mobil berhasil ditambahkan!');
     }
 
     /**
@@ -51,7 +72,9 @@ class VehicleController extends Controller
      */
     public function edit(Vehicle $vehicle)
     {
-        //
+        $admin = Auth::user();
+
+        return view('Dashboard.Vehicles.edit', compact(['admin', 'vehicle']));
     }
 
     /**
@@ -59,7 +82,16 @@ class VehicleController extends Controller
      */
     public function update(UpdateVehicleRequest $request, Vehicle $vehicle)
     {
-        //
+        $validatedData = $request->validated();
+
+        try {
+            $vehicle->update($validatedData);
+            return redirect()->route('mobil.index')
+                ->with('success', 'Data mobil berhasil diperbarui!');
+        } catch (\Exception $e) {
+            return redirect()->route('mobil.edit', $vehicle->id)
+                ->with('error', 'Terjadi kesalahan saat memperbarui data.');
+        }
     }
 
     /**
@@ -67,6 +99,13 @@ class VehicleController extends Controller
      */
     public function destroy(Vehicle $vehicle)
     {
-        //
+        try {
+            $vehicle->delete();
+            return redirect()->route('mobil.index')
+                ->with('success', 'Data mobil berhasil dihapus!');
+        } catch (\Exception $e) {
+            return redirect()->route('mobil.index')
+                ->with('error', 'Terjadi kesalahan saat menghapus data.');
+        }
     }
 }
