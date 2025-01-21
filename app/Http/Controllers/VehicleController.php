@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vehicle;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreVehicleRequest;
 use App\Http\Requests\UpdateVehicleRequest;
 
@@ -13,7 +14,10 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        //
+        $vehicles = Vehicle::all();
+        $admin = Auth::user();
+
+        return view('Dashboard.Vehicles.index', compact(['vehicles', 'admin']));
     }
 
     /**
@@ -21,7 +25,9 @@ class VehicleController extends Controller
      */
     public function create()
     {
-        //
+        $admin = Auth::user();
+
+        return view('Dashboard.Vehicles.create', compact('admin'));
     }
 
     /**
@@ -29,7 +35,7 @@ class VehicleController extends Controller
      */
     public function store(StoreVehicleRequest $request)
     {
-        //
+        var_dump($request);
     }
 
     /**
