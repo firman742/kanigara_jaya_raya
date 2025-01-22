@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ComponentController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VehicleController;
@@ -37,6 +38,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/pengemudi/{driver}/edit', [DriverController::class, 'edit'])->name('pengemudi.edit');
     Route::put('/pengemudi/{driver}', [DriverController::class, 'update'])->name('pengemudi.update');
     Route::delete('/pengemudi/{driver}', [DriverController::class, 'destroy'])->name('pengemudi.destroy');
+
+
+    // Manajemen Komponen
+    Route::get('/komponen', [ComponentController::class, 'index'])->name('komponen.index');
+    Route::get('/komponen/create', [ComponentController::class, 'create'])->name('komponen.create');
+    Route::post('/komponen', [ComponentController::class, 'store'])->name('komponen.store');
+    Route::get('/komponen/{driver}', [ComponentController::class, 'show'])->name('komponen.show');
+    Route::get('/komponen/{driver}/edit', [ComponentController::class, 'edit'])->name('komponen.edit');
+    Route::put('/komponen/{driver}', [ComponentController::class, 'update'])->name('komponen.update');
+    Route::delete('/komponen/{driver}', [ComponentController::class, 'destroy'])->name('komponen.destroy');
 
 });
 

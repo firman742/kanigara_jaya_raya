@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Component;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreComponentRequest;
 use App\Http\Requests\UpdateComponentRequest;
 
@@ -13,7 +14,10 @@ class ComponentController extends Controller
      */
     public function index()
     {
-        //
+        $admin = Auth::user();
+        $components = Component::all();
+
+        return view('Dashboard.Component.index', compact(['admin', 'components']));
     }
 
     /**
