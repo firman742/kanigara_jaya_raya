@@ -11,7 +11,7 @@ class UpdateDriverRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class UpdateDriverRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nama_pengemudi' => 'string',
+            'nomor_telepon' => 'string',
+            'alamat' => 'nullable|string',
+            'lisensi' => 'string',
+            'masa_berlaku_lisensi' => 'date',
         ];
     }
 }

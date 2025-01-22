@@ -25,7 +25,7 @@
       </li><!-- End F.A.Q Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-contact.html">
+        <a class="nav-link collapsed" href="{{ route('pengemudi.index') }}">
           <i class="bi bi-person-check"></i>
           <span>Pengemudi</span>
         </a>

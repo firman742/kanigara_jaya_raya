@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Driver;
 use App\Http\Requests\StoreDriverRequest;
 use App\Http\Requests\UpdateDriverRequest;
+use Illuminate\Support\Facades\Auth;
 
 class DriverController extends Controller
 {
@@ -13,7 +14,10 @@ class DriverController extends Controller
      */
     public function index()
     {
-        //
+        $drivers = Driver::all();
+        $admin = Auth::user();
+
+        return view('Dashboard.Drivers.index', compact(['drivers', 'admin']));
     }
 
     /**
@@ -21,7 +25,9 @@ class DriverController extends Controller
      */
     public function create()
     {
-        //
+        $admin = Auth::user();
+
+        return view('Dashboard.Drivers.create', compact(['admin']));
     }
 
     /**
@@ -29,7 +35,16 @@ class DriverController extends Controller
      */
     public function store(StoreDriverRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        try {
+            Driver::create($validated);
+            return redirect()->route('pengemudi.index')
+                ->with('success', 'Data pengemudi berhasil diperbarui!');
+        } catch (\Exception $e) {
+            return redirect()->route('pengemudi.create')
+                ->with('error', 'Terjadi kesalahan saat menambahkan data.');
+        }
     }
 
     /**
@@ -45,7 +60,9 @@ class DriverController extends Controller
      */
     public function edit(Driver $driver)
     {
-        //
+        $admin = Auth::user();
+
+        return view('Dashboard.Drivers.edit', compact(['driver', 'admin']));
     }
 
     /**
@@ -53,7 +70,16 @@ class DriverController extends Controller
      */
     public function update(UpdateDriverRequest $request, Driver $driver)
     {
-        //
+        $validatedData = $request->validated();
+
+        try {
+            $driver->update($validatedData);
+            return redirect()->route('pengemudi.index')
+                ->with('success', 'Data pengemudi berhasil diperbarui!');
+        } catch (\Exception $e) {
+            return redirect()->route('pengemudi.edit', $driver->id)
+                ->with('error', 'Terjadi kesalahan saat memperbarui data.');
+        }
     }
 
     /**
@@ -61,6 +87,13 @@ class DriverController extends Controller
      */
     public function destroy(Driver $driver)
     {
-        //
+        try {
+            $driver->delete();
+            return redirect()->route('pengemudi.index')
+                ->with('success', 'Data pengemudi berhasil dihapus!');
+        } catch (\Exception $e) {
+            return redirect()->route('pengemudi.index')
+                ->with('error', 'Terjadi kesalahan saat menghapus data.');
+        }
     }
 }
