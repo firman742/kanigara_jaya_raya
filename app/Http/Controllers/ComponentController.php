@@ -25,7 +25,9 @@ class ComponentController extends Controller
      */
     public function create()
     {
-        //
+        $admin = Auth::user();
+
+        return view('Dashboard.Component.create', compact(['admin']));
     }
 
     /**
@@ -33,7 +35,16 @@ class ComponentController extends Controller
      */
     public function store(StoreComponentRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        try {
+            Component::create($validated);
+            return redirect()->route('komponen.index')
+                ->with('success', 'Data komponen berhasil diperbarui!');
+        } catch (\Exception $e) {
+            return redirect()->route('komponen.create')
+                ->with('error', 'Terjadi kesalahan saat menambahkan data.');
+        }
     }
 
     /**
@@ -49,7 +60,9 @@ class ComponentController extends Controller
      */
     public function edit(Component $component)
     {
-        //
+        $admin = Auth::user();
+
+        return view('Dashboard.Component.edit', compact(['component', 'admin']));
     }
 
     /**
@@ -57,7 +70,16 @@ class ComponentController extends Controller
      */
     public function update(UpdateComponentRequest $request, Component $component)
     {
-        //
+        $validatedData = $request->validated();
+
+        try {
+            $component->update($validatedData);
+            return redirect()->route('komponen.index')
+                ->with('success', 'Data komponen berhasil diperbarui!');
+        } catch (\Exception $e) {
+            return redirect()->route('komponen.edit', $component->id)
+                ->with('error', 'Terjadi kesalahan saat memperbarui data.');
+        }
     }
 
     /**
@@ -65,6 +87,13 @@ class ComponentController extends Controller
      */
     public function destroy(Component $component)
     {
-        //
+        try {
+            $component->delete();
+            return redirect()->route('komponen.index')
+                ->with('success', 'Data komponen berhasil dihapus!');
+        } catch (\Exception $e) {
+            return redirect()->route('komponen.index')
+                ->with('error', 'Terjadi kesalahan saat menghapus data.');
+        }
     }
 }

@@ -44,10 +44,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/komponen', [ComponentController::class, 'index'])->name('komponen.index');
     Route::get('/komponen/create', [ComponentController::class, 'create'])->name('komponen.create');
     Route::post('/komponen', [ComponentController::class, 'store'])->name('komponen.store');
-    Route::get('/komponen/{driver}', [ComponentController::class, 'show'])->name('komponen.show');
-    Route::get('/komponen/{driver}/edit', [ComponentController::class, 'edit'])->name('komponen.edit');
-    Route::put('/komponen/{driver}', [ComponentController::class, 'update'])->name('komponen.update');
-    Route::delete('/komponen/{driver}', [ComponentController::class, 'destroy'])->name('komponen.destroy');
+    Route::get('/komponen/{component}', [ComponentController::class, 'show'])->name('komponen.show');
+    Route::get('/komponen/{component}/edit', [ComponentController::class, 'edit'])->name('komponen.edit');
+    Route::put('/komponen/{component}', [ComponentController::class, 'update'])->name('komponen.update');
+    Route::delete('/komponen/{component}', [ComponentController::class, 'destroy'])->name('komponen.destroy');
 
 });
 

@@ -13,7 +13,10 @@ class Component extends Model
     use HasFactory, HasUuids, SoftDeletes;
 
     protected $table = 'components';
+    protected $primaryKey = 'id'; // Pastikan menggunakan nama kolom ID yang sesuai
+
     protected $fillable = [
+        'id',
         'nama_komponen',
     ];
 }

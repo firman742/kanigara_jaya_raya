@@ -3,11 +3,11 @@
 @section('content')
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Manajemen Pengemudi</h1>
+            <h1>Manajemen Komponen</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Pengemudi</li>
+                    <li class="breadcrumb-item active">Komponen</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -26,63 +26,24 @@
                     {{-- Tombol Create --}}
                     <div class="card">
                         <div class="card-body">
-                            <a href="{{ route('pengemudi.index') }}" class="btn btn-success mt-3 rounded rounded-4"><i
+                            <a href="{{ route('komponen.index') }}" class="btn btn-success mt-3 rounded rounded-4"><i
                                     class="bi bi-arrow-left-square"></i> kembali</a>
                         </div>
                     </div>
 
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Edit Pengemudi</h5>
+                            <h5 class="card-title">Edit Komponen</h5>
 
                             <!-- Multi Columns Form -->
-                            <form class="row g-3" method="POST" action="{{ route('pengemudi.update', $driver->id) }}"
+                            <form class="row g-3" method="POST" action="{{ route('komponen.update', $component->id) }}"
                                 enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="col-md-12">
-                                    <label for="nama_pengemudi" class="form-label">Nama</label>
-                                    <input type="text" class="form-control @error('nama_pengemudi') is-invalid @enderror" name="nama_pengemudi" value="{{ old('nama_pengemudi', $driver->nama_pengemudi) }}">
-                                    @error('nama_pengemudi')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-12">
-                                    <label for="nomor_telepon" class="form-label">Nomor Telepon</label>
-                                    <input type="text" class="form-control @error('nomor_telepon') is-invalid @enderror" name="nomor_telepon" value="{{ old('nomor_telepon', $driver->nomor_telepon) }}">
-                                    @error('nomor_telepon')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-
-                                <div class="col-12">
-                                    <label for="lisensi" class="form-label">Lisensi</label>
-                                    <input type="text" class="form-control @error('lisensi') is-invalid @enderror" name="lisensi" value="{{ old('lisensi', $driver->lisensi) }}">
-                                    @error('lisensi')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="col-12">
-                                    <label for="masa_berlaku_lisensi" class="form-label">Masa Berlaku Lisensi</label>
-                                    <input type="date" class="form-control @error('masa_berlaku_lisensi') is-invalid @enderror" name="masa_berlaku_lisensi" min="1900" max="2099" step="1" value="{{ old('masa_berlaku_lisensi', $driver->masa_berlaku_lisensi) }}">
-                                    @error('masa_berlaku_lisensi')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-12">
-                                    <label for="alamat" class="form-label">Alamat</label>
-                                    <textarea class="form-control @error('alamat') is-invalid @enderror" name="alamat" id="alamat" rows="5" >
-                                        {{ old('alamat', $driver->alamat) }}
-                                    </textarea>
-                                    @error('alamat')
+                                    <label for="nama_komponen" class="form-label">Nama Komponen</label>
+                                    <input type="text" class="form-control @error('nama_komponen') is-invalid @enderror" name="nama_komponen" value="{{ old('nama_komponen', $component->nama_komponen) }}">
+                                    @error('nama_komponen')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
