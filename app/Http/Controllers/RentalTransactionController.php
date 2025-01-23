@@ -22,13 +22,13 @@ class RentalTransactionController extends Controller
         $rentalTransactions = RentalTransaction::all();
         $admin = Auth::user();
 
-        return view('Dashboard.Prarental.index', compact(['admin', 'rentalTransactions']));
+        return view('Dashboard.Rental.index', compact(['admin', 'rentalTransactions']));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function praRental()
     {
         $admin = Auth::user();
         $components = Component::all();
@@ -36,7 +36,7 @@ class RentalTransactionController extends Controller
         $drivers = Driver::all();
         $vehicles = Vehicle::all();
 
-        return view('Dashboard.Prarental.create', compact(['admin', 'components', 'customers', 'drivers', 'vehicles']));
+        return view('Dashboard.Rental.pra-rental', compact(['admin', 'components', 'customers', 'drivers', 'vehicles']));
     }
 
     /**
@@ -114,7 +114,7 @@ class RentalTransactionController extends Controller
 
 
         // Redirect dengan pesan sukses
-        return redirect()->route('mobil.keluar.index')->with('success', 'Data berhasil disimpan.');
+        return redirect()->route('rental.index')->with('success', 'Data berhasil disimpan.');
     }
 
     /**
@@ -128,7 +128,7 @@ class RentalTransactionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(RentalTransaction $rentalTransaction)
+    public function pascaRental(RentalTransaction $rentalTransaction)
     {
         //
     }
@@ -149,10 +149,10 @@ class RentalTransactionController extends Controller
         // TODO: Delete Masih gagal
         try {
             $rentalTransaction->delete();
-            return redirect()->route('mobil.keluar.index')
+            return redirect()->route('rental.index')
                 ->with('success', 'Data Rental berhasil dihapus!');
         } catch (\Exception $e) {
-            return redirect()->route('mobil.keluar.index')
+            return redirect()->route('rental.index')
                 ->with('error', 'Terjadi kesalahan saat menghapus data.');
         }
     }

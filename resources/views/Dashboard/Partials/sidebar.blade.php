@@ -16,13 +16,13 @@
             <span>Mobil</span>
         </a>
       </li><!-- End Profile Page Nav -->
-
+{{--
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('komponen.index') }}">
           <i class="bi bi-puzzle"></i>
           <span>Komponen</span>
         </a>
-      </li><!-- End F.A.Q Page Nav -->
+      </li><!-- End F.A.Q Page Nav --> --}}
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('pengemudi.index') }}">
@@ -39,7 +39,7 @@
       </li><!-- End Register Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('mobil.keluar.index') }}">
+        <a class="nav-link collapsed" href="{{ route('rental.index') }}">
           <i class="bi bi-box-arrow-in-left"></i>
           <span>Rental</span>
         </a>

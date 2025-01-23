@@ -61,14 +61,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/pelanggan/{customer}', [CustomerController::class, 'destroy'])->name('pelanggan.destroy');
 
 
-    // Manajemen Mobil Keluar
-    Route::get('/mobil-keluar', [RentalTransactionController::class, 'index'])->name('mobil.keluar.index');
-    Route::get('/mobil-keluar/create', [RentalTransactionController::class, 'create'])->name('mobil.keluar.create');
-    Route::post('/mobil-keluar', [RentalTransactionController::class, 'store'])->name('mobil.keluar.store');
-    Route::get('/mobil-keluar/{transaction}', [RentalTransactionController::class, 'show'])->name('mobil.keluar.show');
-    Route::get('/mobil-keluar/{transaction}/edit', [RentalTransactionController::class, 'edit'])->name('mobil.keluar.edit');
-    Route::put('/mobil-keluar/{transaction}', [RentalTransactionController::class, 'update'])->name('mobil.keluar.update');
-    Route::delete('/mobil-keluar/{transaction}', [RentalTransactionController::class, 'destroy'])->name('mobil.keluar.destroy');
+    // Manajemen rental
+    Route::get('/rental', [RentalTransactionController::class, 'index'])->name('rental.index');
+    Route::get('/rental/pra-rental', [RentalTransactionController::class, 'praRental'])->name('rental.pra-rental');
+    Route::post('/rental', [RentalTransactionController::class, 'store'])->name('rental.store');
+    Route::get('/rental/{transaction}', [RentalTransactionController::class, 'show'])->name('rental.show');
+    Route::get('/rental/{transaction}/pasca-rental', [RentalTransactionController::class, 'pascaRental'])->name('rental.pasca-rental');
+    Route::put('/rental/{transaction}', [RentalTransactionController::class, 'update'])->name('rental.update');
+    Route::delete('/rental/{transaction}', [RentalTransactionController::class, 'destroy'])->name('rental.destroy');
 
 });
 

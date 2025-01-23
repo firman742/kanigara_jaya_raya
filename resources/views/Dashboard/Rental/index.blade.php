@@ -4,11 +4,11 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Manajemen Mobil Keluar</h1>
+            <h1>Manajemen Rental</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Mobil Keluar</li>
+                    <li class="breadcrumb-item active">Rental</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -27,13 +27,13 @@
                     {{-- Tombol Create --}}
                     <div class="card">
                         <div class="card-body">
-                            <a href="{{ route('mobil.keluar.create') }}" class="btn btn-success mt-3 rounded rounded-4"><i
-                                    class="bi bi-plus-square"></i> Tambah Mobil keluar</a>
+                            <a href="{{ route('rental.pra-rental') }}" class="btn btn-success mt-3 rounded rounded-4"><i
+                                    class="bi bi-plus-square"></i> Tambah Pra-rental</a>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Daftar Mobil Keluar</h5>
+                            <h5 class="card-title">Daftar Transaksi Rental</h5>
                             {{-- <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable. Check for <a href="https://fiduswriter.github.io/simple-datatables/demos/" target="_blank">more examples</a>.</p> --}}
 
                             <!-- Table with stripped rows -->
@@ -73,12 +73,12 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('mobil.keluar.show', $transaction->id) }}"
+                                                <a href="{{ route('rental.show', $transaction->id) }}"
                                                     class="btn btn-sm btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Detail">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
                                                 <br>
-                                                <a href="{{ route('mobil.keluar.edit', $transaction->id) }}"
+                                                <a href="{{ route('rental.pasca-rental', $transaction->id) }}"
                                                     class="btn btn-sm btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Kembalikan Mobil">
                                                     <i class="bi bi-arrow-return-left"></i>
                                                 </a>
@@ -99,7 +99,7 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                                <form action="{{ route('mobil.keluar.destroy', $transaction->id) }}" method="POST">
+                                                                <form action="{{ route('rental.destroy', $transaction->id) }}" method="POST">
                                                                     @csrf
                                                                     @method('DELETE')
                                                                     <button type="submit" class="btn btn-danger">Hapus</button>

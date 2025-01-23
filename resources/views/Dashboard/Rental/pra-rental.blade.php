@@ -7,7 +7,8 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Rental keluar</li>
+                    <li class="breadcrumb-item ">Rental</li>
+                    <li class="breadcrumb-item active">Pra Rental</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -23,13 +24,13 @@
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-                    <form class="row g-3" method="POST" action="{{ route('mobil.keluar.store') }}"
+                    <form class="row g-3" method="POST" action="{{ route('rental.store') }}"
                     enctype="multipart/form-data">
                     @csrf
                         {{-- Tombol Create --}}
                         <div class="card">
                             <div class="card-body">
-                                <a href="{{ route('mobil.keluar.index') }}" class="btn btn-success mt-3 rounded rounded-4">
+                                <a href="{{ route('rental.index') }}" class="btn btn-success mt-3 rounded rounded-4">
                                     <i class="bi bi-arrow-left-square"></i> kembali
                                 </a>
                             </div>
