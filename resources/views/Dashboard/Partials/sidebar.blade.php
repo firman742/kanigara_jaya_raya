@@ -32,7 +32,7 @@
       </li><!-- End Contact Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-register.html">
+        <a class="nav-link collapsed" href="{{ route('pelanggan.index') }}">
           <i class="bi bi-person-raised-hand"></i>
           <span>Pelanggan</span>
         </a>

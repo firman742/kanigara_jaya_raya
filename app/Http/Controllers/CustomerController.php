@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
 
@@ -13,7 +14,10 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $admin = Auth::user();
+        $customers = Customer::all();
+
+        return view('Dashboard.Customer.index', compact(['admin', 'customers']));
     }
 
     /**
@@ -21,7 +25,9 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        $admin = Auth::user();
+
+        return view('Dashboard.Customer.create', compact(['admin']));
     }
 
     /**
@@ -29,7 +35,21 @@ class CustomerController extends Controller
      */
     public function store(StoreCustomerRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        if ($validated['validasi_ktp'] === '0') {
+            $validated['validasi_ktp'] = true;
+        }
+
+
+        try {
+            Customer::create($validated);
+            return redirect()->route('pelanggan.index')
+                ->with('success', 'Data pelanggan berhasil diperbarui!');
+        } catch (\Exception $e) {
+            return redirect()->route('pelanggan.create')
+                ->with('error', 'Terjadi kesalahan saat menambahkan data.');
+        }
     }
 
     /**
@@ -45,7 +65,9 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        $admin = Auth::user();
+
+        return view('Dashboard.Customer.edit', compact(['customer', 'admin']));
     }
 
     /**
@@ -53,7 +75,16 @@ class CustomerController extends Controller
      */
     public function update(UpdateCustomerRequest $request, Customer $customer)
     {
-        //
+        $validatedData = $request->validated();
+
+        try {
+            $customer->update($validatedData);
+            return redirect()->route('pelanggan.index')
+                ->with('success', 'Data pelanggan berhasil diperbarui!');
+        } catch (\Exception $e) {
+            return redirect()->route('pelanggan.edit', $customer->id)
+                ->with('error', 'Terjadi kesalahan saat memperbarui data.');
+        }
     }
 
     /**
@@ -61,6 +92,13 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        try {
+            $customer->delete();
+            return redirect()->route('pelanggan.index')
+                ->with('success', 'Data pelanggan berhasil dihapus!');
+        } catch (\Exception $e) {
+            return redirect()->route('pelanggan.index')
+                ->with('error', 'Terjadi kesalahan saat menghapus data.');
+        }
     }
 }

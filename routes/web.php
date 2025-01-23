@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ComponentController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VehicleController;
@@ -39,7 +40,6 @@ Route::middleware('auth')->group(function () {
     Route::put('/pengemudi/{driver}', [DriverController::class, 'update'])->name('pengemudi.update');
     Route::delete('/pengemudi/{driver}', [DriverController::class, 'destroy'])->name('pengemudi.destroy');
 
-
     // Manajemen Komponen
     Route::get('/komponen', [ComponentController::class, 'index'])->name('komponen.index');
     Route::get('/komponen/create', [ComponentController::class, 'create'])->name('komponen.create');
@@ -48,6 +48,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/komponen/{component}/edit', [ComponentController::class, 'edit'])->name('komponen.edit');
     Route::put('/komponen/{component}', [ComponentController::class, 'update'])->name('komponen.update');
     Route::delete('/komponen/{component}', [ComponentController::class, 'destroy'])->name('komponen.destroy');
+
+
+    // Manajemen Pelanggan
+    Route::get('/pelanggan', [CustomerController::class, 'index'])->name('pelanggan.index');
+    Route::get('/pelanggan/create', [CustomerController::class, 'create'])->name('pelanggan.create');
+    Route::post('/pelanggan', [CustomerController::class, 'store'])->name('pelanggan.store');
+    Route::get('/pelanggan/{customer}', [CustomerController::class, 'show'])->name('pelanggan.show');
+    Route::get('/pelanggan/{customer}/edit', [CustomerController::class, 'edit'])->name('pelanggan.edit');
+    Route::put('/pelanggan/{customer}', [CustomerController::class, 'update'])->name('pelanggan.update');
+    Route::delete('/pelanggan/{customer}', [CustomerController::class, 'destroy'])->name('pelanggan.destroy');
 
 });
 

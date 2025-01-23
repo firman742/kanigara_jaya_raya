@@ -11,7 +11,7 @@ class StoreCustomerRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class StoreCustomerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nama_pelanggan' => 'required|string',
+            'perusahaan' => 'required|string',
+            'alamat' => 'required|string',
+            'nomor_telepon' => 'required|string',
+            'validasi_ktp' => 'required|boolean',
+            'tanggal_validasi_ktp' => 'required|date'
         ];
     }
 }

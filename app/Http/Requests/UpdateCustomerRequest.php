@@ -11,7 +11,7 @@ class UpdateCustomerRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class UpdateCustomerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nama_pelanggan' => 'string',
+            'perusahaan' => 'string',
+            'alamat' => 'string',
+            'nomor_telepon' => 'string',
+            'validasi_ktp' => 'boolean',
+            'tanggal_validasi_ktp' => 'date'
         ];
     }
 }
