@@ -306,6 +306,22 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('assets/main.js') }}"></script>
+  <script>
+     function previewImage(input, previewId) {
+        const preview = document.querySelector(previewId);
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.style.display = "block";
+            };
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            preview.src = "#";
+            preview.style.display = "none";
+        }
+    }
+  </script>
 
 </body>
 

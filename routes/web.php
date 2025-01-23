@@ -4,6 +4,7 @@ use App\Http\Controllers\ComponentController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RentalTransactionController;
 use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -58,6 +59,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/pelanggan/{customer}/edit', [CustomerController::class, 'edit'])->name('pelanggan.edit');
     Route::put('/pelanggan/{customer}', [CustomerController::class, 'update'])->name('pelanggan.update');
     Route::delete('/pelanggan/{customer}', [CustomerController::class, 'destroy'])->name('pelanggan.destroy');
+
+
+    // Manajemen Mobil Keluar
+    Route::get('/mobil-keluar', [RentalTransactionController::class, 'index'])->name('mobil.keluar.index');
+    Route::get('/mobil-keluar/create', [RentalTransactionController::class, 'create'])->name('mobil.keluar.create');
+    Route::post('/mobil-keluar', [RentalTransactionController::class, 'store'])->name('mobil.keluar.store');
+    Route::get('/mobil-keluar/{transaction}', [RentalTransactionController::class, 'show'])->name('mobil.keluar.show');
+    Route::get('/mobil-keluar/{transaction}/edit', [RentalTransactionController::class, 'edit'])->name('mobil.keluar.edit');
+    Route::put('/mobil-keluar/{transaction}', [RentalTransactionController::class, 'update'])->name('mobil.keluar.update');
+    Route::delete('/mobil-keluar/{transaction}', [RentalTransactionController::class, 'destroy'])->name('mobil.keluar.destroy');
 
 });
 

@@ -39,18 +39,12 @@
       </li><!-- End Register Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-login.html">
+        <a class="nav-link collapsed" href="{{ route('mobil.keluar.index') }}">
           <i class="bi bi-box-arrow-in-left"></i>
-          <span>Pra Rental</span>
+          <span>Rental</span>
         </a>
       </li><!-- End Login Page Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-error-404.html">
-          <i class="bi bi-box-arrow-in-right"></i>
-          <span>Pasca Rental</span>
-        </a>
-      </li><!-- End Error 404 Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="pages-blank.html">

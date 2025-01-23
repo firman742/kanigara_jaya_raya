@@ -12,6 +12,6 @@ class RentalTransactionSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        \App\Models\RentalTransaction::factory(10)->create();
     }
 }

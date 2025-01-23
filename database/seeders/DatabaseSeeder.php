@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             VehicleSeeder::class,
-            ComponentSeeder::class
+            ComponentSeeder::class,
+            // RentalTransactionSeeder::class
         ]);
 
         User::factory()->create([
