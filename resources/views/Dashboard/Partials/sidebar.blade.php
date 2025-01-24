@@ -11,7 +11,7 @@
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a class="nav-link " href="{{ route('mobil.index') }}">
+        <a class="nav-link collapsed" href="{{ route('mobil.index') }}">
             <i class="bi bi-car-front"></i>
             <span>Mobil</span>
         </a>

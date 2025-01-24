@@ -61,7 +61,13 @@
                                             <td>{{ $customer->perusahaan }}</td>
                                             <td>{{ $customer->alamat }}</td>
                                             <td>{{ $customer->nomor_telepon }}</td>
-                                            <td>{{ $customer->validasi_ktp }}</td>
+                                            <td>
+                                                @if ($customer->validasi_ktp === 1)
+                                                    <span class="badge bg-primary">Valid</span>
+                                                @else
+                                                    <span class="badge bg-danger">Tidak Valid</span>
+                                                @endif
+                                            </td>
                                             <td>{{ $customer->tanggal_validasi_ktp }}</td>
                                             <td>
                                                 <a href="{{ route('pelanggan.edit', $customer->id) }}"

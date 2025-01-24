@@ -128,17 +128,61 @@ class RentalTransactionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function pascaRental(RentalTransaction $rentalTransaction)
+    public function pascaRental(RentalTransaction $transaction)
     {
-        //
+        $admin = Auth::user();
+        $components = Component::all();
+        $customers = Customer::all();
+        $drivers = Driver::all();
+        $vehicles = Vehicle::all();
+
+        return view('Dashboard.Rental.pasca-rental', compact(['admin', 'transaction', 'components', 'customers', 'drivers', 'vehicles']));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRentalTransactionRequest $request, RentalTransaction $rentalTransaction)
+    public function update(UpdateRentalTransactionRequest $request, RentalTransaction $transaction)
     {
-        //
+        // Todo : update data rental masih belum berhasil
+        $validatedData = $request->validated();
+
+        // Mobil belum kembali
+        if (!is_null($request->tanggal_kembali)) {
+            $transaction->status_rental = 1;
+        }
+
+        // Menyimpan foto kerusakan
+
+        if ($request->hasFile('back_foto_depan')) {
+            $path = $request->file('back_foto_depan')->store('uploads/back_foto_depan', 'public');
+            $transaction->back_foto_depan = $path;
+        }
+
+        if ($request->hasFile('back_foto_belakang')) {
+            $path = $request->file('back_foto_belakang')->store('uploads/back_foto_belakang', 'public');
+            $transaction->back_foto_belakang = $path;
+        }
+
+        if ($request->hasFile('back_foto_kanan')) {
+            $path = $request->file('back_foto_kanan')->store('uploads/back_foto_kanan', 'public');
+            $transaction->back_foto_kanan = $path;
+        }
+
+        if ($request->hasFile('back_foto_kiri')) {
+            $path = $request->file('back_foto_kiri')->store('uploads/back_foto_kiri', 'public');
+            $transaction->back_foto_kiri = $path;
+        }
+
+
+        try {
+            $transaction->update($validatedData);
+            return redirect()->route('rental.index')
+                ->with('success', 'Data pelanggan berhasil diperbarui!');
+        } catch (\Exception $e) {
+            return redirect()->route('rental.edit', $transaction->id)
+                ->with('error', 'Terjadi kesalahan saat memperbarui data.');
+        }
     }
 
     /**

@@ -70,10 +70,11 @@
                                 {{-- Todo: Create input with checkbox --}}
                                 <div class="col-12">
                                     <label for="validasi_ktp" class="form-label">Validasi KTP</label>
-                                    <div class="form-check form-switch">
+                                    <input type="file" name="" id="" class="form-control @error('validasi_ktp') is-invalid @enderror">
+                                    {{-- <div class="form-check form-switch">
                                         <input type="hidden" name="validasi_ktp" value="0">
-                                        {{-- <input class="form-check-input @error('validasi_ktp') is-invalid @enderror" type="checkbox" id="validasi_ktp" name="validasi_ktp" value="{{ old('validasi_ktp') }}"> --}}
-                                    </div>
+                                        <input class="form-check-input @error('validasi_ktp') is-invalid @enderror" type="checkbox" id="validasi_ktp" name="validasi_ktp" value="{{ old('validasi_ktp') }}">
+                                    </div> --}}
                                     @error('validasi_ktp')
                                         <div class="invalid-feedback">
                                             {{ $message }}
