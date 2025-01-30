@@ -60,7 +60,7 @@
                                             <td>{{ $no++ }}</td>
                                             <td>{{ $transaction->customer->nama_pelanggan }}</td>
                                             <td>{{ $transaction->driver->nama_pengemudi }}</td>
-                                            <td>{{ $transaction->vehicle->seri }}</td>
+                                            <td>{{ $transaction->vehicle->seri ?? '-' }}</td>
                                             <td>{{ $transaction->tanggal_mulai }}</td>
                                             <td>{{ $transaction->tanggal_rencana_kembali }}</td>
                                             <td class="text-center">{{ $transaction->tanggal_kembali ?? '-' }}</td>
